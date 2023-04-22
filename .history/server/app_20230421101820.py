@@ -11,4 +11,5 @@ def index():
     sql="SELECT date,health_status FROM health_status"
     cursor.execute(sql)
     status=cursor.fetchall()
+    
     return render_template('index.html', results=[shards,status])

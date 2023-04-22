@@ -7,8 +7,5 @@ def index():
     cursor=db.cursor()
     sql="SELECT date,health_active_shards FROM health_active_shards"
     cursor.execute(sql)
-    shards=cursor.fetchall()
-    sql="SELECT date,health_status FROM health_status"
-    cursor.execute(sql)
-    status=cursor.fetchall()
-    return render_template('index.html', results=[shards,status])
+    results=cursor.fetchall()
+    return render_template('index.html', results=results)
