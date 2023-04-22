@@ -3,22 +3,22 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 import click
 app=Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.root_path, 'data.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' +  'data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # 关闭对模型修改的监控
 # 在扩展类实例化前加载配置
 db = SQLAlchemy(app)
 class Health_active_shards(db.Model):
     date=db.Column(db.DateTime,primary_key=True)
     cluster_name=db.Column(db.String(35),primary_key=True)
-    value=db.Column(db.Integer)
+    health_active_shards=db.Column(db.Integer)
 class Health_status(db.Model):
     date=db.Column(db.DateTime,primary_key=True)
     cluster_name=db.Column(db.String(35),primary_key=True)
-    value=db.Column(db.Integer)
+    health_status=db.Column(db.Integer)
 class Health_number_of_nodes(db.Model):
     date=db.Column(db.DateTime,primary_key=True)
     cluster_name=db.Column(db.String(35),primary_key=True)
-    value=db.Column(db.Integer)
+    health_number_of_nodes=db.Column(db.Integer)
 #flask自定义命令
 @app.cli.command()
 @click.option('--drop', is_flag=True, help='Create after drop.')  # 设置选项
@@ -30,8 +30,8 @@ def initdb(drop):
     click.echo('Initialized database.')  # 输出提示信息
 @app.route('/')
 def index():
-    shards=db.session.query(Health_active_shards.date,Health_active_shards.value).all()
-    #shards=Health_status.query.count()
-    status=db.session.query(Health_status.date,Health_status.value).all()
-    nodes=db.session.query(Health_number_of_nodes.date,Health_number_of_nodes.value).all()
-    return render_template('index.html',shards=shards,status=status,nodes=nodes)
+   # shards=db.session.query(Health_active_shards.date,Health_active_shards.health_active_shards).count()
+    shards=Health_status.query.count()
+   # status=db.session.query(Health_status.date,Health_status.health_status).all()
+   # nodes=db.session.query(Health_number_of_nodes.date,Health_number_of_nodes.health_number_of_nodes).all()
+    return render_template('index.html',shards=shards)

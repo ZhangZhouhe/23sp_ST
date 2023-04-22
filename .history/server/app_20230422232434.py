@@ -30,8 +30,8 @@ def initdb(drop):
     click.echo('Initialized database.')  # 输出提示信息
 @app.route('/')
 def index():
-    shards=db.session.query(Health_active_shards.date,Health_active_shards.value).all()
-    #shards=Health_status.query.count()
-    status=db.session.query(Health_status.date,Health_status.value).all()
-    nodes=db.session.query(Health_number_of_nodes.date,Health_number_of_nodes.value).all()
-    return render_template('index.html',shards=shards,status=status,nodes=nodes)
+   # shards=db.session.query(Health_active_shards.date,Health_active_shards.health_active_shards).count()
+    shards=Health_status.query.count()
+   # status=db.session.query(Health_status.date,Health_status.health_status).all()
+   # nodes=db.session.query(Health_number_of_nodes.date,Health_number_of_nodes.health_number_of_nodes).all()
+    return render_template('index.html',shards=shards)

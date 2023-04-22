@@ -34,4 +34,4 @@ def index():
     #shards=Health_status.query.count()
     status=db.session.query(Health_status.date,Health_status.value).all()
     nodes=db.session.query(Health_number_of_nodes.date,Health_number_of_nodes.value).all()
-    return render_template('index.html',shards=shards,status=status,nodes=nodes)
+    return render_template('index.html',shards=shards)

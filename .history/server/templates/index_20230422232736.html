@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+     {% for row in results[0] %}
+        <li>
+            {{shards[0]}}--{{shards[1]}}
+        </li>
+        {% endfor %}
+        <h1>end for nodes</h1>
+        <li>
+        {% for row in results[1] %}
+        <li>
+            {{status[0]}}--{{status[1]}}
+        </li>
+        {% endfor %}
+        <h1>end for nodes</h1>
+        <li>
+            {{nodes[0]}}--{{nodes[1]}}
+        </li>
+        {% endfor %}
+        <h1>end for nodes</h1>
+</body>
+</html>
